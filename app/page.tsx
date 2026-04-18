@@ -9,7 +9,7 @@ export default function Home() {
             <div className="inline-block max-w-xl text-center justify-center">
                 <span className={title()}>{siteConfig.name}</span>
                 <div className={subtitle({ class: "mt-12" })}>
-                    A new way to discover movies and TV shows.
+                    Your new way to discover movies and TV shows.
                 </div>
             </div>
 
