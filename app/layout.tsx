@@ -11,7 +11,7 @@ import { Navbar } from "@/components/navbar";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
     title: {
@@ -50,7 +50,7 @@ export default function RootLayout({
                 >
                     <div className="relative flex flex-col h-screen">
                         <Navbar />
-                        <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+                        <main className="mx-auto pt-16 px-6 flex-grow">
                             {children}
                         </main>
                         <footer className="w-full flex items-center justify-center py-3">

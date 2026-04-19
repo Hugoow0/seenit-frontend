@@ -2,8 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
     name: "SEENIT",
-    description:
-        "Make beautiful websites regardless of your design experience.",
+    description: "Your new way to discover movies and TV shows.",
     navItems: [
         {
             label: "Home",
