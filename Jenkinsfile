@@ -21,7 +21,12 @@ pipeline {
 
                 stage('Build') {
                     steps {
-                        sh 'npm run build'
+                        sh '''
+                        echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" > .env
+                        
+                        echo "Building static Next.js export..."
+                        npm run build
+                        '''
                     }
                 }
 
