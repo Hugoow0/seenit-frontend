@@ -41,6 +41,52 @@ export default function TvShowDetailsModal({ item }: any) {
     const [liked, setLiked] = useState(false);
 
     useEffect(() => {
+        const storedLikes = localStorage.getItem("seenit-userLiked");
+        if (storedLikes) {
+            try {
+                const parsedLikes = JSON.parse(storedLikes);
+                if (parsedLikes.tvshowIds?.includes(item.id)) {
+                    setLiked(true);
+                }
+            } catch (e) {
+                console.error("Failed to parse userLiked from localStorage", e);
+            }
+        }
+    }, [item.id]);
+
+    const handleLike = () => {
+        const storedLikes = localStorage.getItem("seenit-userLiked");
+        let parsedLikes = {
+            movieIds: [] as number[],
+            tvshowIds: [] as number[],
+        };
+
+        if (storedLikes) {
+            try {
+                parsedLikes = JSON.parse(storedLikes);
+            } catch (e) {}
+        }
+
+        parsedLikes.movieIds = parsedLikes.movieIds || [];
+        parsedLikes.tvshowIds = parsedLikes.tvshowIds || [];
+
+        const isLiked = !liked;
+        setLiked(isLiked);
+
+        if (isLiked) {
+            if (!parsedLikes.tvshowIds.includes(item.id)) {
+                parsedLikes.tvshowIds.push(item.id);
+            }
+        } else {
+            parsedLikes.tvshowIds = parsedLikes.tvshowIds.filter(
+                (id: number) => id !== item.id,
+            );
+        }
+
+        localStorage.setItem("seenit-userLiked", JSON.stringify(parsedLikes));
+    };
+
+    useEffect(() => {
         if (details) {
             const foundSeason = details.seasons.find(
                 (s) => s.season_number === seasonNumber,
@@ -93,6 +139,7 @@ export default function TvShowDetailsModal({ item }: any) {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Button
+                                        disabled
                                         variant="default"
                                         onClick={() => {
                                             console.log("Play btn clicked");
@@ -118,9 +165,7 @@ export default function TvShowDetailsModal({ item }: any) {
                                         variant="secondary"
                                         size="icon"
                                         className="rounded-full border-2 border-white/50 hover:border-white"
-                                        onClick={() => {
-                                            setLiked(!liked);
-                                        }}
+                                        onClick={handleLike}
                                     >
                                         <Heart
                                             className={

@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import useIsMobile from "@/hooks/use-media-query";
 import Image from "next/image";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Star, Play, Plus, Heart, X } from "lucide-react";
 import { fetchMovieDetails } from "@/lib/api";
 import type { MovieDetailsResponse } from "@/types/media";
@@ -30,6 +30,52 @@ export default function MovieDetailsModal({ item }: any) {
     const [isLoading, setIsLoading] = useState(false);
     const [details, setDetails] = useState<MovieDetailsResponse | null>(null);
     const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+        const storedLikes = localStorage.getItem("seenit-userLiked");
+        if (storedLikes) {
+            try {
+                const parsedLikes = JSON.parse(storedLikes);
+                if (parsedLikes.movieIds?.includes(item.id)) {
+                    setLiked(true);
+                }
+            } catch (e) {
+                console.error("Failed to parse userLiked from localStorage", e);
+            }
+        }
+    }, [item.id]);
+
+    const handleLike = () => {
+        const storedLikes = localStorage.getItem("seenit-userLiked");
+        let parsedLikes = {
+            movieIds: [] as number[],
+            tvshowIds: [] as number[],
+        };
+
+        if (storedLikes) {
+            try {
+                parsedLikes = JSON.parse(storedLikes);
+            } catch (e) {}
+        }
+
+        parsedLikes.movieIds = parsedLikes.movieIds || [];
+        parsedLikes.tvshowIds = parsedLikes.tvshowIds || [];
+
+        const isLiked = !liked;
+        setLiked(isLiked);
+
+        if (isLiked) {
+            if (!parsedLikes.movieIds.includes(item.id)) {
+                parsedLikes.movieIds.push(item.id);
+            }
+        } else {
+            parsedLikes.movieIds = parsedLikes.movieIds.filter(
+                (id: number) => id !== item.id,
+            );
+        }
+
+        localStorage.setItem("seenit-userLiked", JSON.stringify(parsedLikes));
+    };
 
     const fetchDetails = async () => {
         if (details || isLoading) return;
@@ -94,6 +140,7 @@ export default function MovieDetailsModal({ item }: any) {
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <Button
+                                                    disabled
                                                     variant="default"
                                                     onClick={() => {
                                                         console.log(
@@ -125,9 +172,7 @@ export default function MovieDetailsModal({ item }: any) {
                                                     variant="ghost"
                                                     size="icon"
                                                     className="rounded-full border-2 border-white"
-                                                    onClick={() => {
-                                                        setLiked(!liked);
-                                                    }}
+                                                    onClick={handleLike}
                                                 >
                                                     <Heart
                                                         className={
@@ -291,6 +336,7 @@ export default function MovieDetailsModal({ item }: any) {
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <Button
+                                                disabled
                                                 variant="default"
                                                 onClick={() => {
                                                     console.log(
@@ -322,9 +368,7 @@ export default function MovieDetailsModal({ item }: any) {
                                                 variant="secondary"
                                                 size="icon"
                                                 className="rounded-full border-2 border-white/50 hover:border-white"
-                                                onClick={() => {
-                                                    setLiked(!liked);
-                                                }}
+                                                onClick={handleLike}
                                             >
                                                 <Heart
                                                     className={
