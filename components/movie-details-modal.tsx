@@ -195,8 +195,9 @@ export default function MovieDetailsModal({ item }: any) {
                                                     {details.movie?.status}
                                                     {" • "}
                                                     {
-                                                        details.movie
-                                                            ?.release_date
+                                                        details.movie?.release_date?.split(
+                                                            "-",
+                                                        )[0]
                                                     }
                                                     {" • "}
                                                     {details.movie?.runtime} min
@@ -390,7 +391,11 @@ export default function MovieDetailsModal({ item }: any) {
                                             <div className="text-muted-foreground text-sm font-medium md:text-base">
                                                 {details.movie?.status}
                                                 {" • "}
-                                                {details.movie?.release_date}
+                                                {
+                                                    details.movie?.release_date?.split(
+                                                        "-",
+                                                    )[0]
+                                                }
                                                 {" • "}
                                                 {details.movie?.runtime} min
                                                 {" • "}

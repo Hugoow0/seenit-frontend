@@ -203,17 +203,7 @@ export default function TvShowDetailsModal({ item }: any) {
                                             details.tvshow?.first_air_date?.split(
                                                 "-",
                                             )[0]
-                                        }
-                                        {details.tvshow?.last_air_date ? (
-                                            <>
-                                                {" - "}{" "}
-                                                {
-                                                    details.tvshow?.last_air_date.split(
-                                                        "-",
-                                                    )[0]
-                                                }{" "}
-                                            </>
-                                        ) : null}{" "}
+                                        }{" "}
                                         • {details.tvshow?.number_of_seasons}{" "}
                                         Season
                                         {details.tvshow?.number_of_seasons > 1

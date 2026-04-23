@@ -41,21 +41,45 @@ export async function fetchTrendingMovies(): Promise<
     return fetchApi<TrendingResponse>("/trending/movies");
 }
 
+export async function fetchNowPlayingMovies(): Promise<
+    ApiResult<TrendingResponse>
+> {
+    return fetchApi<TrendingResponse>("/movies/now_playing");
+}
+
+export async function fetchTopRatedMovies(): Promise<
+    ApiResult<TrendingResponse>
+> {
+    return fetchApi<TrendingResponse>("/movies/top_rated");
+}
+
 export async function fetchTrendingTvShows(): Promise<
     ApiResult<TrendingResponse>
 > {
     return fetchApi<TrendingResponse>("/trending/tvshows");
 }
 
+export async function fetchTopRatedTvShows(): Promise<
+    ApiResult<TrendingResponse>
+> {
+    return fetchApi<TrendingResponse>("/tvshows/top_rated");
+}
+
+export async function fetchPopularTvShows(): Promise<
+    ApiResult<TrendingResponse>
+> {
+    return fetchApi<TrendingResponse>("/tvshows/popular");
+}
+
 // Client-Side Fetch Functions (for Client Components / on-demand)
 export async function fetchMovieDetails(
     id: number,
 ): Promise<ApiResult<MovieDetailsResponse>> {
-    return fetchApi<MovieDetailsResponse>(`/movies/${id}`);
+    return fetchApi<MovieDetailsResponse>(`/movies/details/${id}`);
 }
 
 export async function fetchTvShowDetails(
     id: number,
 ): Promise<ApiResult<TVShowDetailsResponse>> {
-    return fetchApi<TVShowDetailsResponse>(`/tvshows/${id}`);
+    return fetchApi<TVShowDetailsResponse>(`/tvshows/details/${id}`);
 }

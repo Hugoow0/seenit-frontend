@@ -33,7 +33,7 @@ export default function TrendingCarousel({
 
     return (
         <>
-            <div className="flex items-center justify-between mb-4 px-4">
+            <div className="flex items-center justify-between px-4">
                 <h2 className="text-2xl font-bold sm:px-4">{carouselName}</h2>
             </div>
             <div className="relative w-full overflow-hidden">
@@ -64,6 +64,7 @@ export default function TrendingCarousel({
                     <CarouselNext />
                 </Carousel>
             </div>
+            <div className="mb-10" />
         </>
     );
 }
