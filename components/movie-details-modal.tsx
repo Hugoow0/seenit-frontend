@@ -119,8 +119,8 @@ export default function MovieDetailsModal({ item }: any) {
                         <DrawerTitle />
                         <DrawerDescription />
                         {isLoading ? (
-                            <div className="flex h-96 items-center justify-center">
-                                <Loader2 className="size-8 animate-spin text-zinc-500" />
+                            <div className="flex h-full items-center justify-center">
+                                <Loader2 className="size-12 animate-spin text-zinc-500" />
                             </div>
                         ) : details ? (
                             <>
