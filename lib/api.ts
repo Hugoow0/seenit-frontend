@@ -83,3 +83,14 @@ export async function fetchTvShowDetails(
 ): Promise<ApiResult<TVShowDetailsResponse>> {
     return fetchApi<TVShowDetailsResponse>(`/tvshows/details/${id}`);
 }
+
+export interface SearchResponse {
+    movies?: any[];
+    tvShows?: any[];
+}
+
+export async function fetchSearchResults(
+    query: string,
+): Promise<ApiResult<SearchResponse>> {
+    return fetchApi<SearchResponse>(`/search/${encodeURIComponent(query)}`);
+}

@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { fetchTrendingMovies, fetchTrendingTvShows } from "@/lib/api";
-import TrendingCarousel from "@/components/trending-carousel";
+import TrendingCarousel from "@/components/carousel";
 import { CarouselSkeleton } from "@/components/carousel-skeleton";
 import type { TrendingResponse } from "@/types/media";
 
 export default function Home() {
     const [moviesData, setMoviesData] = useState<TrendingResponse | null>(null);
-    const [tvShowsData, setTvShowsData] = useState<TrendingResponse | null>(null);
+    const [tvShowsData, setTvShowsData] = useState<TrendingResponse | null>(
+        null,
+    );
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {

@@ -7,14 +7,20 @@ import {
     fetchPopularTvShows,
     fetchTrendingTvShows,
 } from "@/lib/api";
-import TrendingCarousel from "@/components/trending-carousel";
+import TrendingCarousel from "@/components/carousel";
 import { CarouselSkeleton } from "@/components/carousel-skeleton";
 import type { TrendingResponse } from "@/types/media";
 
 export default function TVShowsPage() {
-    const [topRatedData, setTopRatedData] = useState<TrendingResponse | null>(null);
-    const [popularData, setPopularData] = useState<TrendingResponse | null>(null);
-    const [trendingData, setTrendingData] = useState<TrendingResponse | null>(null);
+    const [topRatedData, setTopRatedData] = useState<TrendingResponse | null>(
+        null,
+    );
+    const [popularData, setPopularData] = useState<TrendingResponse | null>(
+        null,
+    );
+    const [trendingData, setTrendingData] = useState<TrendingResponse | null>(
+        null,
+    );
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {

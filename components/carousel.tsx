@@ -16,7 +16,7 @@ interface TrendingCarouselProps {
     isMovie: boolean;
 }
 
-export default function TrendingCarousel({
+export default function CarouselComponent({
     carouselName,
     carouselItems,
     isMovie,
