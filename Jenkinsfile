@@ -19,6 +19,13 @@ pipeline {
                     }
                 }
 
+                stage('Test') {
+                    steps {
+                        echo "Running Vitest test suite..."
+                        sh 'npm run test' 
+                    }
+                }
+
                 stage('Build') {
                     steps {
                         sh '''
