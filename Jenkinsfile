@@ -22,7 +22,7 @@ pipeline {
                 stage('Test') {
                     steps {
                         echo "Running Vitest test suite..."
-                        sh 'npm run test' 
+                        sh 'NODE_ENV=test CI=true npm run test'
                     }
                 }
 
